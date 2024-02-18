@@ -88,7 +88,7 @@ HTML templates will include two functions from the start: `dict` and `list`.
 
 It's very usefull for passing named parameters to other templates, for example:
 
-```handlerbars
+```handlebars
 {{define "greet"}}
     Hello, {{.Name}}!
 {{end}}
