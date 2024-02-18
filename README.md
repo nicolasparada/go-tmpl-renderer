@@ -1,3 +1,5 @@
+[![Go Reference](https://pkg.go.dev/badge/github.com/nicolasparada/go-tmpl-renderer.svg)](https://pkg.go.dev/github.com/nicolasparada/go-tmpl-renderer)
+
 # Golang Template Renderer
 
 An opinionated HTML template renderer for Golang.
