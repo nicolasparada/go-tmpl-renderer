@@ -39,7 +39,7 @@ go get github.com/nicolasparada/go-tmpl-renderer
 
 `templates/welcome.tmpl`
 
-```handlerbars
+```handlebars
 {{template "layout.tmpl" .}}
 
 {{define "content"}}
