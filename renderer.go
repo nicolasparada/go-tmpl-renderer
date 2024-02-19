@@ -15,11 +15,18 @@ type Renderer struct {
 	FuncMap        template.FuncMap
 	IncludePatters []string
 
+	once      sync.Once
 	mu        sync.Mutex
 	templates map[string]*template.Template
 }
 
+func (r *Renderer) init() {
+	r.templates = map[string]*template.Template{}
+}
+
 func (r *Renderer) Render(w io.Writer, name string, data any) error {
+	r.once.Do(r.init)
+
 	tmpl, ok := r.template(name)
 	if !ok {
 		tmpl, err := template.New(name).Funcs(funcMap).Funcs(r.FuncMap).ParseFS(r.FS, r.patterns(name)...)
