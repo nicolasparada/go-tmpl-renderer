@@ -29,7 +29,7 @@ func (r *Renderer) Render(w io.Writer, name string, data any) error {
 
 	tmpl, ok := r.template(name)
 	if !ok {
-		tmpl, err := template.New(name).Funcs(funcMap).Funcs(r.FuncMap).ParseFS(r.FS, r.patterns(name)...)
+		tmpl, err := r.parse(name)
 		if err != nil {
 			return err
 		}
@@ -40,6 +40,28 @@ func (r *Renderer) Render(w io.Writer, name string, data any) error {
 	}
 
 	return tmpl.Execute(w, data)
+}
+
+func (r *Renderer) RenderBlock(w io.Writer, name, block string, data any) error {
+	r.once.Do(r.init)
+
+	tmpl, ok := r.template(name)
+	if !ok {
+		tmpl, err := r.parse(name)
+		if err != nil {
+			return err
+		}
+
+		r.setTemplate(name, tmpl)
+
+		return tmpl.ExecuteTemplate(w, block, data)
+	}
+
+	return tmpl.ExecuteTemplate(w, block, data)
+}
+
+func (r *Renderer) parse(name string) (*template.Template, error) {
+	return template.New(name).Funcs(funcMap).Funcs(r.FuncMap).ParseFS(r.FS, r.patterns(name)...)
 }
 
 func (r *Renderer) patterns(name string) []string {
