@@ -57,7 +57,7 @@ package main
 
 import (
     // other imports
-    tmplrenderer "github.com/nicolasparada/go-tmpl-render"
+    tmplrenderer "github.com/nicolasparada/go-tmpl-renderer"
 )
 
 //go:embed templates/includes/*.tmpl templates/*.tmpl
