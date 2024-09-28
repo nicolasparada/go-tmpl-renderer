@@ -67,7 +67,7 @@ func main() {
     renderer := &tmplrenderer.Renderer{
         FS:             templatesFS,
         BaseDir:        "templates",
-        IncludePatters: []string{"includes/*.tmpl"}
+        IncludePatters: []string{"includes/*.tmpl"},
     }
 
     http.HandleFunc("/welcome", func(w http.ResponseWriter, r *http.Request) {
